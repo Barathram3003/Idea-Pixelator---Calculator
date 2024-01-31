@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Pixelator Calculator</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-800">
+    
+          <section class="justify-center rounded-2xl p-5  mb-10 bg-white-200 ">
+            <div class="flex flex-wrap pb-16 pb-28 justify-center">
+                <div class="w-full lg:w-1/2  lg:p-5">
+                  <div class="bg-gray-300 pt-10 p-5 rounded-2xl shadow-lg">
+                    <div class="w-full lg:w-1/2"></div>
+                
+                    
+                        <h2 class="text-center lg:text-left text-2xl lg:text-4xl font-bold lg:font-semibold">
+                            TNEB Bill Calculator
+                          </h2>
+                        <div class="inputdiv p-5">
+                            <input class="bg-black text-white" type="text" id="input" placeholder="Units">
+                        </div>
+                        <div class="p-3">
+                            <button class="h-12 px-6 m-2  text-lg text-indigo-100 transition-colors duration-150 bg-gray-700 rounded-lg focus:shadow-outline " 
+                            type="submit" 
+                            onclick="ebBill()">
+                              Calculate
+                            </button>
+                        </div>
+                        <div class="text-center lg:text-left text-2xl lg:text-4xl" id="result">
+                           
+                        </div>
+                    
+                    </div>
+                  </div>
+                </div>
+          </section>
+
+
+          <section class="justify-center rounded-2xl p-5  mb-10 bg-white-200 ">
+            <div class="flex flex-wrap pb-16 pb-28 justify-center">
+                <div class="w-full lg:w-1/2  lg:p-5">
+                  <div class="bg-gray-300 pt-10 p-5 rounded-2xl shadow-lg">
+                    <div class="w-full lg:w-1/2"></div>
+                        <h2 class="text-center lg:text-left text-2xl lg:text-4xl font-bold lg:font-semibold">
+                            FD Rate Calculator
+                          </h2>
+                        <div class="inputdiv p-5">
+                            <input class="bg-black text-white" type="text" id="input" placeholder="tenure months">
+                        </div>
+                        <div class="p-3">
+                            <button class="h-12 px-6 m-2  text-lg text-indigo-100 transition-colors duration-150 bg-gray-700 rounded-lg focus:shadow-outline " 
+                            type="submit" 
+                            onclick="fdRate()">
+                              Calculate
+                            </button>
+                        </div>
+                        <div class="text-center lg:text-left text-2xl lg:text-4xl" id="answer">  
+                        </div>
+                    </div>
+                  </div>
+                </div>
+          </section>
+
+
+          <section class="justify-center rounded-2xl p-5  mb-10 bg-white-200 ">
+            <div class="flex flex-wrap pb-16 pb-28 justify-center">
+                <div class="w-full lg:w-1/2  lg:p-5">
+                  <div class="bg-gray-300 pt-10 p-5 rounded-2xl shadow-lg">
+                    <div class="w-full lg:w-1/2"></div>
+                        <h2 class="text-center lg:text-left text-2xl lg:text-4xl font-bold lg:font-semibold">
+                             Lenght Converter
+                          </h2>
+                        <div class="inputdiv p-5">
+                            <input class="bg-black text-white" type="text" id="input" placeholder="length in CM">
+                        </div>
+                        <div class="p-3">
+                            <button class="h-12 px-6 m-2  text-lg text-indigo-100 transition-colors duration-150 bg-gray-700 rounded-lg focus:shadow-outline " 
+                            type="submit" 
+                            onclick="convert()">
+                              Calculate
+                            </button>
+                        </div>
+                        <div class="text-center lg:text-left text-2xl lg:text-4xl" id="converted">  
+                        </div>
+                    </div>
+                  </div>
+                </div>
+          </section>
+
+          
+          
+       
+
+   
+    <script>
+
+          function ebBill(){
+            const units = Number(document.getElementById("input").value)
+            let rate = 0
+            
+            if(units<=100){
+                rate = units*0
+            }
+                
+            else if(units>100 && units<=200){
+                rate = 100*0 + (units-100)*2.25
+            }
+                
+           
+            else if(units>200 && units<=400){
+                rate = 100*0 + (200-100)*2.25 + (units-200)*4.5
+            }
+                
+            else if(units>400 && units<=500){
+                rate = 100*0 + (200-100)*2.25 + (400-200)*4.5 + (units - 400)*6
+            }
+            //Above 500
+            else if(units>500 && units<=600){
+                rate = 100*0 + (300)*4.5 + (500-400)*6 + ((units - 500)*8)
+            }
+            else if(units>600 && units<=800){
+                rate = 100*0 + (300)*4.5 + (500-400)*6 + (600 - 500)*8 + (units - 600)*9
+            }
+            else if(units>800 && units<=1000){
+                rate = 100*0 + (300)*4.5 + (500-400)*6 + (600 - 500)*8 + (800 - 600)*9 + (units - 800)*10
+            }
+            else{
+                rate = 100*0 + (300)*4.5 + (500-400)*6 + (600 - 500)*8 + (800 - 600)*9 + (1000 - 800)*10 + (units - 1000)*11
+            }
+            let result = document.querySelector('#result')
+            result.innerHTML = "Bill Amount RS."+ rate +""
+          }
+
+
+          function fdRate(){
+            const months = Number(document.getElementById("input").value)
+            let rate = 0
+            //else if ladder
+            // <3 months - 5.8% 
+            // 3 - 6 months - 6.5%
+            // 7 - 9 months - 6.8% 
+            // >=10 months - 7%
+    
+            if(months<3)
+                rate = 5.8
+            else if(months>=3 && months<=6)
+                rate = 6.5
+            else if(months>=7 && months<=9)
+                rate = 6.8
+            else
+                rate = 7
+            
+            let result = document.querySelector('#answer')
+            result.innerHTML = "Your interest rate is " + rate + "%"
+          }
+
+
+          function convert(){
+            const cmVal = Number(document.getElementById("input").value)
+            const inchVal = cmVal/2.54
+            const result = document.getElementById("converted")
+            result.innerHTML = inchVal.toFixed(3) + " inches"
+          }
+
+
+    </script>
+
+
+</body>
+</html>
+
